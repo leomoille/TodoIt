@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,16 +23,15 @@
 <nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">To Do List app</a>
-
+            <a class="navbar-brand" href="{{ path('homepage') }}">To Do List app</a>
             <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms"/>
         </div>
     </div>
 </nav>
 
-<!-- Page Content -->
+{# Page Content #}
 <div class="container">
-    <div class="row">
+    <div class="my-4">
         <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
 
         {% if app.user %}
@@ -74,10 +73,8 @@
         </div>
     </div>
 </div>
-<!-- /.container -->
 
 <div class="container">
-
     <hr>
     <footer>
         <div class="row">
@@ -86,7 +83,6 @@
             </div>
         </div>
     </footer>
-
 </div>
 
 <script src="{{ asset('js/jquery.js') }}"></script>
