@@ -85,22 +85,31 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     public function toggle(Task $task, EntityManagerInterface $manager): RedirectResponse
     {
+        $message = '';
         if ($task->isDone()) {
             $task->setIsDone(false);
+            $message = 'La tâche a bien été marquée comme en cours.';
         } else {
             $task->setIsDone(true);
+            $message = 'La tâche a bien été marquée comme terminée.';
         }
 
         $manager->persist($task);
         $manager->flush();
 
+        $this->addFlash('success', $message);
+
         return $this->redirectToRoute('task_list');
     }
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    public function delete(): RedirectResponse
+    public function delete(Task $task, EntityManagerInterface $manager): RedirectResponse
     {
-        // TODO: Add delete feature
+        $manager->remove($task);
+        $manager->flush();
+
+        $this->addFlash('success', 'La tâche a bien été supprimée.');
+
         return $this->redirectToRoute('task_list');
     }
 }
