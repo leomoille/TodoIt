@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -33,6 +34,11 @@ class TaskController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $manager;
 
+            $task
+                ->setCreatedAt(new DateTimeImmutable())
+                ->setIsDone(false);
+
+
             $em->persist($task);
             $em->flush();
 
@@ -44,6 +50,16 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
+    #[Route('/tasks/done', name: 'task_done')]
+    public function listDone(TaskRepository $taskRepository): Response
+    {
+        $tasks = $taskRepository->findBy(['isDone' => true]);
+
+        return $this->render('task/done.html.twig', [
+            'tasks' => $tasks,
+        ]);
+    }
+
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     public function editAction(Task $task, Request $request, EntityManagerInterface $manager): RedirectResponse|Response
     {
@@ -51,7 +67,8 @@ class TaskController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($task);
             $manager->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
@@ -63,5 +80,36 @@ class TaskController extends AbstractController
             'form' => $form->createView(),
             'task' => $task,
         ]);
+    }
+
+    #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
+    public function toggle(Task $task, EntityManagerInterface $manager): RedirectResponse
+    {
+        $message = '';
+        if ($task->isDone()) {
+            $task->setIsDone(false);
+            $message = 'La tâche a bien été marquée comme en cours.';
+        } else {
+            $task->setIsDone(true);
+            $message = 'La tâche a bien été marquée comme terminée.';
+        }
+
+        $manager->persist($task);
+        $manager->flush();
+
+        $this->addFlash('success', $message);
+
+        return $this->redirectToRoute('task_list');
+    }
+
+    #[Route('/tasks/{id}/delete', name: 'task_delete')]
+    public function delete(Task $task, EntityManagerInterface $manager): RedirectResponse
+    {
+        $manager->remove($task);
+        $manager->flush();
+
+        $this->addFlash('success', 'La tâche a bien été supprimée.');
+
+        return $this->redirectToRoute('task_list');
     }
 }
