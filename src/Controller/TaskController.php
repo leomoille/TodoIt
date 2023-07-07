@@ -50,6 +50,16 @@ class TaskController extends AbstractController
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
 
+    #[Route('/tasks/done', name: 'task_done')]
+    public function listDone(TaskRepository $taskRepository): Response
+    {
+        $tasks = $taskRepository->findBy(['isDone' => true]);
+
+        return $this->render('task/done.html.twig', [
+            'tasks' => $tasks,
+        ]);
+    }
+
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     public function editAction(Task $task, Request $request, EntityManagerInterface $manager): RedirectResponse|Response
     {
@@ -73,9 +83,17 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
-    public function toggle(): RedirectResponse
+    public function toggle(Task $task, EntityManagerInterface $manager): RedirectResponse
     {
-        // TODO: Add toggle feature
+        if ($task->isDone()) {
+            $task->setIsDone(false);
+        } else {
+            $task->setIsDone(true);
+        }
+
+        $manager->persist($task);
+        $manager->flush();
+
         return $this->redirectToRoute('task_list');
     }
 

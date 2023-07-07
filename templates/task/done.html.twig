@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{{ path('task_create') }}" class="btn btn-success">Créer une nouvelle tâche</a>
-    <a href="{{ path('task_done') }}" class="btn btn-secondary">Consulter la liste des tâches terminées</a>
+    <a href="{{ path('task_list') }}" class="btn btn-success">Consulter toutes les tâches</a>
     <div class="row mt-4">
         {% for task in tasks %}
             <div class="col-sm-4 col-lg-4 col-md-4">
@@ -24,14 +23,6 @@
                         <hr>
                         <p class="card-text">{{ task.content }}</p>
                         <hr>
-                        <a href="{{ path('task_toggle', {'id' : task.id }) }}"
-                           class="btn btn-success btn-sm pull-right d-block">
-                            {% if not task.isDone %}
-                                <i class="bi bi-check2-circle"></i> Marquer comme faite
-                            {% else %}
-                                Marquer non terminée
-                            {% endif %}
-                        </a>
                         <a href="{{ path('task_delete', {'id' : task.id }) }}"
                            class="btn btn-danger btn-sm pull-right mt-2 d-block"><i class="bi bi-trash"></i>
                             Supprimer
@@ -41,10 +32,11 @@
             </div>
         {% else %}
             <div class="alert alert-warning mt-4" role="alert">
-                Il n'y a pas encore de tâche enregistrée.
+                Il n'y a pas encore de tâche terminée.
                 <a href="{{ path('task_create') }}" class="btn btn-warning pull-right" style="margin: auto">Créer une
                     tâche</a>
             </div>
         {% endfor %}
     </div>
 {% endblock %}
+
