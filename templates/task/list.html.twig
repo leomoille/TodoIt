@@ -12,7 +12,9 @@
             <div class="col-sm-4 col-lg-4 col-md-4">
                 <div class="card my-1 mx-1">
                     <div class="card-body">
-                        <h4 class="card-title"><a class="link-underline link-underline-opacity-0" href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
+                        <h4 class="card-title">
+                            <a class="link-underline link-underline-opacity-0"
+                               href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
                         </h4>
                         <p class="card-subtitle">
                             {% if not task.isDone %}
@@ -46,5 +48,53 @@
                     tâche</a>
             </div>
         {% endfor %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <hr class="mt-4 mb-4">
+            <h2>Tâches orphelines</h2>
+            {% for task in orphanedTasks %}
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="card my-1 mx-1">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a class="link-underline link-underline-opacity-0"
+                                   href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
+                            </h4>
+                            {% if not task.owner %}
+                                <p class="badge text-bg-info">Tâche orpheline</p>
+                            {% endif %}
+                            <p class="card-subtitle">
+                                {% if not task.isDone %}
+                                    <i class="bi bi-clock-history"></i> En cours
+                                {% else %}
+                                    <i class="bi bi-check-circle"></i> Terminée
+                                {% endif %}
+                            </p>
+                            <hr>
+                            <p class="card-text">{{ task.content }}</p>
+                            <hr>
+                            <a href="{{ path('task_toggle', {'id' : task.id }) }}"
+                               class="btn btn-success btn-sm pull-right d-block">
+                                {% if not task.isDone %}
+                                    <i class="bi bi-check2-circle"></i> Marquer comme faite
+                                {% else %}
+                                    Marquer non terminée
+                                {% endif %}
+                            </a>
+                            <a href="{{ path('task_delete', {'id' : task.id }) }}"
+                               class="btn btn-danger btn-sm pull-right mt-2 d-block"><i class="bi bi-trash"></i>
+                                Supprimer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-warning mt-4" role="alert">
+                    Il n'y a pas encore de tâche enregistrée.
+                    <a href="{{ path('task_create') }}" class="btn btn-warning pull-right" style="margin: auto">Créer
+                        une
+                        tâche</a>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
