@@ -19,7 +19,8 @@ class TaskController extends AbstractController
     public function listAction(TaskRepository $taskRepository): Response
     {
         return $this->render('task/list.html.twig', [
-            'tasks' => $taskRepository->findAll(),
+            'tasks' => $taskRepository->findBy(['owner' => $this->getUser(), 'isDone' => false]),
+            'orphanedTasks' => $taskRepository->findBy(['owner' => null]),
         ]);
     }
 
@@ -36,7 +37,8 @@ class TaskController extends AbstractController
 
             $task
                 ->setCreatedAt(new DateTimeImmutable())
-                ->setIsDone(false);
+                ->setIsDone(false)
+                ->setOwner($this->getUser());
 
 
             $em->persist($task);
@@ -53,7 +55,7 @@ class TaskController extends AbstractController
     #[Route('/tasks/done', name: 'task_done')]
     public function listDone(TaskRepository $taskRepository): Response
     {
-        $tasks = $taskRepository->findBy(['isDone' => true]);
+        $tasks = $taskRepository->findBy(['owner' => $this->getUser(), 'isDone' => true]);
 
         return $this->render('task/done.html.twig', [
             'tasks' => $tasks,
