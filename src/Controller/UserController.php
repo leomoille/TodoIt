@@ -63,7 +63,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $manager->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été modifié");

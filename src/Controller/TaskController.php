@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -36,10 +35,9 @@ class TaskController extends AbstractController
             $em = $manager;
 
             $task
-                ->setCreatedAt(new DateTimeImmutable())
+                ->setCreatedAt(new \DateTimeImmutable())
                 ->setIsDone(false)
                 ->setOwner($this->getUser());
-
 
             $em->persist($task);
             $em->flush();

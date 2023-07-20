@@ -11,7 +11,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        TaskFactory::createMany(10);;
+        TaskFactory::createMany(10);
 
         TaskFactory::createMany(10, [
             'owner' => UserFactory::createOne([
