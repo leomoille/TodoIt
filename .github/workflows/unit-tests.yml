@@ -1,4 +1,4 @@
-name: Unit Tests / Functional Tests
+name: Unit Tests
 
 on:
   push:
@@ -18,7 +18,9 @@ jobs:
         image: mariadb:10.4.28
         env:
           MYSQL_ROOT_PASSWORD: root_password
-          MYSQL_DATABASE: test_database
+          MYSQL_USER: db_user_test
+          MYSQL_PASSWORD: db_password_test
+          MYSQL_DATABASE: db_name_test
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -38,13 +40,7 @@ jobs:
 
       - name: Set up Test Environment
         run: |
-          # Replace placeholders in .env.test with actual database credentials if not already set
-          sed -i 's/DB_HOST=/DB_HOST=127.0.0.1/g' .env.test
-          sed -i 's/DB_USERNAME=/DB_USERNAME=root/g' .env.test
-          sed -i 's/DB_PASSWORD=/DB_PASSWORD=root_password/g' .env.test
-          sed -i 's/DB_DATABASE=/DB_DATABASE=test_database/g' .env.test
-          
-          cat .env.test
+          echo "DATABASE_URL_TEST=mysql://db_user_test:db_password_test@localhost:3306/db_name_test" > .env.test
 
       - name: Set up Test Database
         run: |
