@@ -44,8 +44,14 @@ jobs:
 
       - name: Set up Test Database
         run: |
-          # Run migrations
-          php bin/console doctrine:migrations:migrate --env=test --no-interaction
+          # Check if there are migrations available
+          if [ -z "$(php bin/console doctrine:migrations:status --env=test)" ]; then
+            # No migrations available, use doctrine:schema:create
+            php bin/console doctrine:schema:create --env=test
+          else
+            # Migrations available, run migrations with --no-interaction parameter
+            php bin/console doctrine:migrations:migrate --env=test --no-interaction
+          fi
 
           # Load fixtures (change the command to your specific fixtures loading method)
           php bin/console doctrine:fixtures:load --env=test --no-interaction --group=TestFixtures
