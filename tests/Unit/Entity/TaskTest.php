@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Entity;
+namespace App\Tests\Unit\Entity;
 
 use App\Entity\Task;
 use App\Entity\User;
@@ -43,10 +43,10 @@ class TaskTest extends TestCase
 
     public function testCanGetAndSetCreatedAt()
     {
-        self::markTestIncomplete();
-        //        $task = new Task();
-        //
-        //        $task->setCreatedAt(new \DateTimeImmutable('10-10-2023'));
-        //        self::assertSame(new \DateTimeImmutable('10-10-2023'), $task->getCreatedAt());
+        $task = new Task();
+        $datetime = new \DateTimeImmutable('10-10-2023');
+
+        $task->setCreatedAt($datetime);
+        self::assertSame($datetime, $task->getCreatedAt());
     }
 }

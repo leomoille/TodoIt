@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Entity;
+namespace App\Tests\Unit\Entity;
 
 use App\Entity\Task;
 use App\Entity\User;
@@ -54,4 +54,6 @@ class UserTest extends TestCase
         $user->addTask($task);
         self::assertSame($task, $user->getTasks()[0]);
     }
+
+    // Supprimer une tâche
 }
