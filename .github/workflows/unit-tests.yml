@@ -38,16 +38,13 @@ jobs:
 
       - name: Set up Test Environment
         run: |
-          # Create .env.test file from the template if it doesn't exist
-          if [ ! -f .env.test ]; then
-            cp .env.test.template .env.test
-          fi
-
           # Replace placeholders in .env.test with actual database credentials if not already set
           sed -i 's/DB_HOST=/DB_HOST=127.0.0.1/g' .env.test
           sed -i 's/DB_USERNAME=/DB_USERNAME=root/g' .env.test
           sed -i 's/DB_PASSWORD=/DB_PASSWORD=root_password/g' .env.test
           sed -i 's/DB_DATABASE=/DB_DATABASE=test_database/g' .env.test
+          
+          cat .env.test
 
       - name: Set up Test Database
         run: |
