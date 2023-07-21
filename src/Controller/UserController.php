@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/user', name: 'user_list')]
+    #[Route('/users', name: 'user_list')]
     public function listAction(UserRepository $userRepository): Response
     {
         return $this->render('user/list.html.twig', [
