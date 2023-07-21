@@ -2,6 +2,7 @@
 
 namespace App\Tests\Entity;
 
+use App\Entity\Task;
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -37,5 +38,20 @@ class UserTest extends TestCase
 
         $user->setPassword('password');
         self::assertSame('password', $user->getPassword());
+    }
+
+    public function testCanGetAndSetTask()
+    {
+        $user = new User();
+        $task = new Task();
+        $task
+            ->setOwner($user)
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setTitle('Test')
+            ->setContent('Content')
+            ->setIsDone(false);
+
+        $user->addTask($task);
+        self::assertSame($task, $user->getTasks()[0]);
     }
 }

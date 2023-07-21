@@ -1,0 +1,4 @@
+doctrine:
+  dbal:
+    # Utilisez le chemin absolu vers le fichier de la base de données SQLite
+    url: 'mysql://%env(resolve:DB_USERNAME):%env(resolve:DB_PASSWORD)%@%env(resolve:DB_HOST)%/%env(resolve:DB_DATABASE)%?serverVersion=10.4.28-MariaDB&charset=utf8mb4'
