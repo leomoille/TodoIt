@@ -83,8 +83,12 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
-    public function toggle(Task $task, EntityManagerInterface $manager): RedirectResponse
+    public function toggle(Task $task, EntityManagerInterface $manager): Response
     {
+        if ($task->getOwner() !== $this->getUser()) {
+            return new Response('', '404');
+        }
+
         $message = '';
         if ($task->isDone()) {
             $task->setIsDone(false);
@@ -103,11 +107,17 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
-    public function delete(Task $task, EntityManagerInterface $manager): RedirectResponse
+    public function delete(Task $task, EntityManagerInterface $manager): RedirectResponse|Response
     {
-        if ($task->getOwner()) {
+        if ($task->getOwner() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+            return new Response('', '404');
+        }
+
+        if ($task->getOwner() && $task->getOwner() === $this->getUser()) {
             $task->getOwner()->removeTask($task);
-        } else {
+        }
+
+        if (null === $task->getOwner() && $this->isGranted('ROLE_ADMIN')) {
             $manager->remove($task);
         }
 

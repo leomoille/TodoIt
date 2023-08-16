@@ -55,5 +55,18 @@ class UserTest extends TestCase
         self::assertSame($task, $user->getTasks()[0]);
     }
 
-    // Supprimer une tâche
+    public function testCanRemoveTask()
+    {
+        $user = new User();
+        $task = new Task();
+        $task
+            ->setOwner($user)
+            ->setCreatedAt(new \DateTimeImmutable())
+            ->setTitle('Test')
+            ->setContent('Content')
+            ->setIsDone(false);
+
+        $user->removeTask($task);
+        self::assertEmpty($user->getTasks());
+    }
 }

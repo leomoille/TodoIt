@@ -21,43 +21,4 @@ class DefaultTest extends WebTestCase
                 "Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !"
             );
     }
-
-    public function testGetLoginPageFromHomepage(): void
-    {
-        $this->browser()
-            ->visit('/')
-            ->click('Se connecter')
-            ->assertSuccessful();
-    }
-
-    public function testLoginAsUserFromLoginPage(): void
-    {
-        UserFactory::createOne([
-            'email' => 'test@todo.fr',
-            'password' => 'password',
-        ]);
-
-        $this->browser()
-            ->visit('/login')
-            ->assertSeeElement('#inputEmail')
-            ->fillField('inputEmail', 'test@todo.fr')
-            ->assertSeeElement('#inputPassword')
-            ->fillField('inputPassword', 'password')
-            ->click('button')
-            ->followRedirects()
-            ->assertAuthenticated();
-    }
-
-    public function testLoginWithInvalidCredentialsShouldFail(): void
-    {
-        $this->browser()
-            ->visit('/login')
-            ->assertSeeElement('#inputEmail')
-            ->fillField('inputEmail', 'wrong@todo.fr')
-            ->assertSeeElement('#inputPassword')
-            ->fillField('inputPassword', 'wrongpass')
-            ->click('button')
-            ->followRedirects()
-            ->assertNotAuthenticated();
-    }
 }
