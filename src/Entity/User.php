@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Task::class)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Task::class, cascade: ['persist'])]
     private Collection $tasks;
 
     public function __construct()
