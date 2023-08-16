@@ -1,5 +1,4 @@
 .idea
-public/test-coverage
 
 ###> symfony/framework-bundle ###
 /.env.local
