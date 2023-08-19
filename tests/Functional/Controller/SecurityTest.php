@@ -12,7 +12,7 @@ class SecurityTest extends WebTestCase
     use HasBrowser;
     use ResetDatabase;
 
-    public function testGetLoginPageFromHomepage(): void
+    public function testCanGetLoginPageFromHomepage(): void
     {
         $this->browser()
             ->visit('/')
@@ -24,6 +24,7 @@ class SecurityTest extends WebTestCase
     {
         UserFactory::createOne([
             'email' => 'test@todo.fr',
+            'username' => 'testUser',
             'password' => 'password',
         ]);
 
@@ -35,7 +36,8 @@ class SecurityTest extends WebTestCase
             ->fillField('inputPassword', 'password')
             ->click('button')
             ->followRedirects()
-            ->assertAuthenticated();
+            ->assertAuthenticated()
+            ->assertSee('Bonjour testUser !');
     }
 
     public function testCanNotLoginWithInvalidCredentialsShouldFail(): void
