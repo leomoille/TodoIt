@@ -114,7 +114,7 @@ class TaskController extends AbstractController
         }
 
         if ($task->getOwner() && $task->getOwner() === $this->getUser()) {
-            $task->getOwner()->removeTask($task);
+            $manager->remove($task);
         }
 
         if (null === $task->getOwner() && $this->isGranted('ROLE_ADMIN')) {
