@@ -1,0 +1,173 @@
+{
+  "main": {
+    "id": "54a812dc5056066e",
+    "type": "split",
+    "children": [
+      {
+        "id": "84b7ca4d6ee7ba0b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "84eec0643dc9a0fc",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Audit de perfomance/Audit de performance.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d40cd9995e51f876",
+    "type": "split",
+    "children": [
+      {
+        "id": "459db157e02cea2e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a20eb6874daf7dc4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "fd25e2f4e3f75a8b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "50d883db960a0d0f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "5ec8d1c89cf5fbb3",
+    "type": "split",
+    "children": [
+      {
+        "id": "a77d5b1c5f7f2c68",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "86056865de8d6872",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "assets/register-doctrine-query.png",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8eed6d425cb4775a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "assets/register-doctrine-query.png",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f79b6156cdaadbf0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "ff015b1c73dd1f9f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "assets/register-doctrine-query.png"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "a20eb6874daf7dc4",
+  "lastOpenFiles": [
+    "Audit de perfomance/Audit de perfordmance.pdf",
+    "Audit de perfomance/Audit de performance.md",
+    "Audit de perfomance/Audit de performance.pdf",
+    "assets/register-doctrine-query.png",
+    "assets/profiler-register.png",
+    "assets/task-delete-doctrine-query.png",
+    "assets/profiler-task-delete 1.png",
+    "assets/profiler-task-delete.png",
+    "assets/task-done-query.png",
+    "assets/profiler-task-done.png",
+    "assets/task-edit-doctrine-query.png",
+    "assets/task-create-doctrine-query.png",
+    "assets/profiler-task-edit.png",
+    "Documentation technique/Fonctionnement de la connexion sur To Do and Co.md",
+    "Documentation technique/Fonctionnement de la connexion sur To Do and Co.pdf",
+    "Audit de perfomance",
+    "2023-08-19.md",
+    "assets",
+    "Documentation technique"
+  ]
+}
