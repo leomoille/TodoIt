@@ -11,11 +11,11 @@ https://openclassrooms.com/projects/ameliorer-un-projet-existant-1
 > Dépot ouvert originalement lors de mon cursus de développeur backend PHP / Symfony chez OpenClassrooms.  
 > Le derniers commit publié lors de mes études : 
 
-Les commits suivants sont des améliorations et mises à jours hors du cadre de mon parcours.
+Les commits suivants sont des améliorations et mises à jour hors du cadre de mon parcours.
 
 ## Prérequis
 
-Pour pouvoir mettre en place SnowTricks vous aurez besoin des outils suivants :
+Pour pouvoir mettre en place ToDoIt vous aurez besoin des outils suivants :
 
 - PHP 8.2
 - Composer
