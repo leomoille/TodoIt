@@ -7,72 +7,72 @@ Base du projet #8 : Améliorez un projet existant
 
 https://openclassrooms.com/projects/ameliorer-un-projet-existant-1
 
----
-## Vous faites partie de l'équipe de To Do and Co ?
 
-[Découvrez comment contribuer](CONTRIBUTING.md) dès maintenant !
+> Dépot ouvert originalement lors de mon cursus de développeur backend PHP / Symfony chez OpenClassrooms.  
+> Le derniers commit publié lors de mes études : 
 
----
+Les commits suivants sont des améliorations et mises à jours hors du cadre de mon parcours.
 
-## Installation du projet en local
+## Prérequis
 
-Récupérez le projet sur votre machine local.
+Pour pouvoir mettre en place SnowTricks vous aurez besoin des outils suivants :
 
-```shell
-git clone https://github.com/leomoille/todo-and-co.git
-```
+- PHP 8.2
+- Composer
+- NodeJS (et npm)
+- Symfony CLI
+- Docker
 
-Une fois le projet téléchargé, rendez-vous à la racine de ce dernier pour configurer les fichiers `.env.local`
-et `.env.test.local`.
+## 1 - Installer les dépendances PHP
 
-```dotenv
-# env.local
-DATABASE_URL="mysql://user:password@127.0.0.1:3306/todo-and-co?serverVersion=10.4.28-MariaDB&charset=utf8mb4"
-
-# env.local.test
-DATABASE_URL_TEST=mysql://user:password@127.0.0.1:3306/todo-and-co?serverVersion=10.4.28-MariaDB&charset=utf8mb4
-```
-
-Une fois vos deux fichiers configurés, télécharger les dépendances PHP via Composer.
+Depuis un terminal dans le dossier du projet, lancez la commande suivante :
 
 ```shell
 composer install
 ```
 
-Vous pouvez maintenant créer les deux bases de données, une pour le développement et une pour les tests.
+## 2 - Installation des dépendances JS
+
+Depuis un terminal dans le dossier du projet, lancez la commande suivante :
 
 ```shell
-# Base de données de développement
-symfony console doctrine:database:create
-
-# Base de données de tests
-symfony console doctrine:database:create --env=test
+npm install
 ```
 
-Pour ensuite lancer les migrations sur ces deux bases.
+## 3 - Démarrer le container Docker
+
+Démarrez le container contenant la base de données, le mail catcher ainsi qu'un phpMyAdmin
 
 ```shell
-# Base de données de développement
-symfony console doctrine:migrations:migrate
-
-# Base de données de tests
-symfony console doctrine:migrations:migrate --env=test
+docker compose up -d
 ```
 
-Vous pouvez aussi charger le jeu de données pour remplir la base de données fictives.
+## 4 - Charger les fixtures
+
+Depuis un terminal dans le dossier du projet, lancez la commande suivante :
 
 ```shell
-symfony console doctrine:fictures:load
+symfony console d:f:l -n
 ```
 
-Vous pouvez retrouver le contenu des fixtures dans le fichier [AppFixtures](src/DataFixtures/AppFixtures.php).
+## 5 - Build des assets
 
-Une fois ces étapes réalisées, lancez le serveur en veillant à ce que votre serveur MySQL(MariaDB) soit également
-démarré.
+Depuis un terminal dans le dossier du projet, lancez la commande suivante :
 
 ```shell
-symfony console server:start
-
-# Si vous ne souhaitez pas voir les logs et garder votre terminal actif
-symfony console server:start -d
+npm run build
 ```
+
+## 5 - Démarrer le serveur local
+
+Depuis un terminal dans le dossier du projet, lancez la commande suivante :
+
+```shell
+symfony serve -d
+```
+
+## 6 - Découvrir ToDoIt !
+
+Une fois le serveur démarré, vous pouvez vous rendre sur [127.0.0.1](http://127.0.0.1) pour naviguer sur le site.
+
+> Par défaut, le serveur écoute sur le port `8000` mais si ce dernier est indisponible le port sera différent. Consultez l'output du terminal pour connaitre le port utilisé.
